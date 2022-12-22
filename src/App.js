@@ -1,7 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import Home from './components/Home';
 import Login from './components/Login';
+import Register from './components/Register';
 import RegisterReactBootstrap from './components/RegisterReactBootstrap';
+import Signin from './components/Signin';
+import Signup from './components/Signup';
 import Main from './layout/Main';
 
 const router = createBrowserRouter([
@@ -11,12 +15,24 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <RegisterReactBootstrap></RegisterReactBootstrap>
+        element: <Home></Home>
+      },
+      {
+        path:'/signin',
+        element:<Signin></Signin>
+      },
+      {
+        path:"/signup",
+        element:<Signup></Signup>
       },
       {
         path: '/register',
-        element: <RegisterReactBootstrap></RegisterReactBootstrap>
+        element: <Register></Register>
       },
+      // {
+      //   path: '/register',
+      //   element: <RegisterReactBootstrap></RegisterReactBootstrap>
+      // },
       {
         path: '/login',
         element: <Login></Login>
