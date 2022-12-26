@@ -2,11 +2,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Login';
+import Orders from './components/Orders';
 import Register from './components/Register';
-import RegisterReactBootstrap from './components/RegisterReactBootstrap';
+// import RegisterReactBootstrap from './components/RegisterReactBootstrap';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Main from './layout/Main';
+import PrivateRoute from "./routes/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,11 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login></Login>
       },
+      {
+        path: '/orders',
+        element: <PrivateRoute><Orders></Orders></PrivateRoute>
+      },
+     
     ]
   }
 ])

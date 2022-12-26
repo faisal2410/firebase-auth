@@ -1,13 +1,12 @@
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import app from '../firebase/firebase.init';
-
-const auth = getAuth(app);
-
+import { AuthContext } from '../contexts/UserContext';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
+   
+    const { signIn } = useContext(AuthContext);
     const [success, setSuccess] = useState(false);
-    const [userEmail, setUserEmail] = useState('');
+    const navigate=useNavigate()
+    // const [userEmail, setUserEmail] = useState('');
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -18,11 +17,13 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password)
 
-        signInWithEmailAndPassword(auth, email, password)
+        signIn(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                form.reset();
                 setSuccess(true);
+                navigate("/");
             })
             .catch(error => {
                 console.error('error', error)
@@ -32,23 +33,23 @@ const Login = () => {
 
     const handleEmailBlur = event => {
         const email = event.target.value;
-        setUserEmail(email);
+        // setUserEmail(email);
         console.log(email);
     }
 
-    const handleForgetPassword = () => {
-        if (!userEmail) {
-            alert('Please enter your email address.')
-            return;
-        }
-        sendPasswordResetEmail(auth, userEmail)
-            .then(() => {
-                alert('Password Reset email sent. Please check your email.')
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }
+    // const handleForgetPassword = () => {
+    //     if (!userEmail) {
+    //         alert('Please enter your email address.')
+    //         return;
+    //     }
+    //     sendPasswordResetEmail(auth, userEmail)
+    //         .then(() => {
+    //             alert('Password Reset email sent. Please check your email.')
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         })
+    // }
 
     return (
         <div className='w-50 mx-auto'>
@@ -66,7 +67,7 @@ const Login = () => {
             </form>
             {success && <p>Successfully login to the account</p>}
             <p><small>New to this website? Please <Link to='/register'>Register</Link></small></p>
-            <p><small>Forget Password? <button type="button" onClick={handleForgetPassword} className="btn btn-link">Reset Password</button></small></p>
+            {/* <p><small>Forget Password? <button type="button" onClick={handleForgetPassword} className="btn btn-link">Reset Password</button></small></p> */}
         </div>
     );
 };

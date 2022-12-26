@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/UserContext';
 
 const Header = () => {
-    const {test, user, logOut } = useContext(AuthContext);
-    console.log('context=========>', test.displayName);
+    const { user, logOut } = useContext(AuthContext);
+   
 
     const handleSignOut = () => {
         logOut()
@@ -23,6 +23,7 @@ const Header = () => {
             <Link to="/" className="me-2">Home</Link>
             <Link to="/signin" className="me-2">Signin</Link>
             <Link to="/signup" className="me-2">Signup</Link>
+            <Link to="/orders" className="me-2">Orders</Link>
             <Link to="/register" className="me-2">Register</Link>
             <Link to="/login" className="me-2">Login</Link>
             {user?.email && <span>Welcome, {user.email}</span>}

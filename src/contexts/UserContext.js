@@ -6,8 +6,7 @@ export const AuthContext = createContext();
 
 const auth = getAuth(app);
 
-const UserContext = ({children}) => {
-    const test={displayName:"Faisal ahmed"}
+const UserContext = ({children}) => {  
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -30,6 +29,8 @@ const UserContext = ({children}) => {
     }
 
     // why are we doing this?
+
+  
     useEffect( () => {
         const unsubscribe =  onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
@@ -43,7 +44,7 @@ const UserContext = ({children}) => {
 
     }, [])
 
-    const authInfo = {test,user, loading, createUser, signIn, logOut, signInWithGoogle,}
+    const authInfo = {user, loading, createUser, signIn, logOut, signInWithGoogle,}
 
     return (
         <AuthContext.Provider value={authInfo}>
@@ -55,14 +56,4 @@ const UserContext = ({children}) => {
 export default UserContext;
 
 
-// import React from 'react';
 
-// const UserContext = () => {
-//     return (
-//         <AuthContext.Provider value={authInfo}>
-//         {children}
-//     </AuthContext.Provider>
-//     );
-// };
-
-// export default UserContext;
