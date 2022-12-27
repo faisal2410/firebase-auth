@@ -27,7 +27,7 @@ const Register = () => {
         signInWithGoogle()
         .then( result => {
             const user = result.user;
-            console.log(user);
+            console.log("user from register component====>",user);
         })
         .catch(error => console.error(error));
     }
